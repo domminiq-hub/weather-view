@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <div class="weather-info">
-      <h1>Pogoda🌤️</h1>
+  <h1 class="white">Pogoda najbliże 7dni🌤️</h1>
+  <div id="container">
+    <div class="weather-info today">
+      <h1>Dziś</h1>
       <p v-if="weatherDataNow">
-        Lokalizacja: {{ weatherDataNow.name }}<sup>{{ weatherDataNow.sys.country }}</sup>
+        <b class="icon"> {{ weatherIcon[weatherDataNow.weather[0].main] }} </b><br>
+        Lokalizacja: {{ weatherDataNow.name }}<sup>{{ weatherDataNow.sys.country }}</sup><br>
         Temperatura: {{ weatherDataNow.main.temp }}°C<br>
         Wilgotność: {{ weatherDataNow.main.humidity }}%<br>
         Ciśnienie: {{ weatherDataNow.main.pressure }}hPa<br>
@@ -14,11 +16,10 @@
       </p>
     </div>
     <div id="week">
-      <h1>Pogoda najbliże 7dni🌤️</h1>
       <template v-if="weatherData && weatherData.length">
         <div v-for="(data, index) in weatherData" :key="index">
           <div class="weather-info">
-            <h1>{{ weatherIcon[data.weather[0].main] }}</h1>
+            <b class="icon">{{ weatherIcon[data.weather[0].main] }}</b>
             Temperatura: {{ data.main.temp }}°C<br>
             Wilgotność: {{ data.main.humidity }}%<br>
             Ciśnienie: {{ data.main.pressure }}hPa<br>
@@ -67,7 +68,7 @@ export default {
         });
     },
     getWeatherData() {
-      axios.get('https://api.openweathermap.org/data/2.5/forecast?q=Wrocław,pl&appid=' + APIKey.key + '&cnt=7&units=metric')
+      axios.get('https://api.openweathermap.org/data/2.5/forecast?q=Wrocław,pl&appid=' + APIKey.key + '&cnt=6&units=metric')
         .then((response) => {
           console.log(response.data)
           this.weatherData = response.data.list;
@@ -82,15 +83,20 @@ export default {
 
 <style>
 body {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Verdana';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin-top: 60px;
+  background-image: url('assets/rain.jpg');
 }
 
-h1 {
-  font-size: 2em;
+.white {
+  color: white;
+}
+
+.icon {
+  font-size: 4.5rem;
 }
 
 p {
@@ -98,13 +104,41 @@ p {
 }
 
 .weather-info {
-  border: 2px black solid;
-  width: 10%;
+
+  grid-row: 2;
+  grid-column: 1;
   float: left;
-  margin-left: 10px;
+  transition: font-size 1s;
+  color: white;
+  grid-row: 1;
+}
+
+.today {
+  grid-column: 1;
+}
+
+.weather-info:hover {
+  cursor: pointer;
+  background-color: rgba(255, 0, 0, 0.5);
+  color: rgb(0, 255, 42);
 }
 
 #week {
+  width: auto;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: 1fr;
+}
+
+#container {
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 300px;
   width: 1200px;
+  border-radius: 10px;
+  border: solid black 2px;
+  display: grid;
+  grid-template-columns: 300px auto;
+  grid-template-rows: 1fr;
+  margin: auto;
 }
 </style>
