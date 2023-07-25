@@ -1,0 +1,69 @@
+# Pliki i katalogi utworzone przez npm
+node_modules/
+
+# Pliki npm lock
+package-lock.json
+yarn.lock
+
+# Pliki, które nie są potrzebne w repozytorium
+*.log
+*.log.*
+*.pid
+*.seed
+*.pid.lock
+*.cert
+*.pem
+
+# Katalogi utworzone przez różne edytory i narzędzia
+.DS_Store
+.idea/
+.vscode/
+
+# Pliki cache i tymczasowe pliki
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+*.pnp.js
+.pnp.cjs
+*.pnp.cjs
+.cache/
+.cache-loader/
+dist/
+build/
+
+# Katalog yarn v2
+.yarn/
+yarn-error.log
+
+# Plik api-key.js
+api-key.js
+
+# Pliky osierocone
+**/node_modules
+**/bower_components
+
+# Katalogi kompilacji
+lib/
+bin/
+out/
+*.zip
+*.rar
+*.tar.gz
+*.tgz
+*.7z
+*.dmg
+*.exe
+*.iso
+
+# Plik lock od yarna w workspaces
+**/yarn.lock
+
+# Upewnij się, że poniższe pliki nie zostaną dodane do repozytorium
+# Zamiast tego mogą być skopiowane do odpowiedniego katalogu
+# .env*
+# .env.local*
+# .env.development*
+# .env.test*
+# .env.production*
